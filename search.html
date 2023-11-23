@@ -1,0 +1,81 @@
+---
+layout: default
+title: 搜索
+header-img: "img/search-bg.jpg"
+---
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading" id="tag-heading">
+                    <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
+                    <span class="subheading">{{ page.description }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<style>
+  /* 样式添加到输入框和搜索结果 */
+  .search-container {
+    position: relative;
+    width: 380px;
+    margin: 0 auto; /* 水平居中 */
+	margin-top: 30px;
+  }
+  
+  #search-input {
+	width: 100%;
+    padding-left: 30px;
+  }
+  
+  #search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  #results-container {
+    margin: 0 auto; /* 水平居中 */
+    padding: 0; /* 去掉内边距 */
+  }
+  
+  #results-container li {
+    text-align: center; /* 居中对齐 */
+  }
+  
+  #results-container li a {
+    text-decoration: none;
+    color: #333; /* 文字颜色 */
+  }
+
+  #results-container li a:hover {
+    color: #3498db; /* 鼠标悬停时的文字颜色 */
+  }
+
+</style>
+<!-- HTML elements for search -->
+<div class="search-container">
+  <input type="text" id="search-input" placeholder="搜索博客 - 输入标题/相关内容/日期/Tags..." />
+  <i id="search-icon" class="fa fa-search" aria-hidden="true"></i>
+</div>
+<ul id="results-container"></ul>
+
+<!-- script pointing to jekyll-search.js -->
+
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<script>
+SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json',
+    searchResultTemplate: '<li><a href="{url}" description="{title}">{date} &raquo; {title}</a></li>',
+    noResultsText: '没有搜索到文章',
+    limit: 20,
+    fuzzy: false
+  })
+</script>

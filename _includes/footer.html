@@ -89,10 +89,45 @@
                         </a>
                     </li>
                     {% endif %}
-                </ul>
+                </ul>				
                 <p class="copyright text-muted">
-                    Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }}
-                    <br>
+					 <!--添加访问统计-->
+					<!-- script pointing to busuanzi.js -->
+					<script src="{{ site.baseurl }}/js/busuanzi.pure.mini.js"></script>
+					  <span id="busuanzi_container_site_pv">
+					本站总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
+					<br>                   
+					<span id="sitetime"></span> 
+					<script language=javascript>
+						function siteTime(){
+							window.setTimeout("siteTime()", 1000);
+							var seconds = 1000;
+							var minutes = seconds * 60;
+							var hours = minutes * 60;
+							var days = hours * 24;
+							var years = days * 365;
+							var today = new Date();
+							var todayYear = today.getFullYear();
+							var todayMonth = today.getMonth()+1;
+							var todayDate = today.getDate();
+							var todayHour = today.getHours();
+							var todayMinute = today.getMinutes();
+							var todaySecond = today.getSeconds();
+							var t1 = Date.UTC(2023,11,22,21,40,00);  //此处填写建站时间 依次为 年,月,日,时,分,秒注意格式 半角,
+							var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+							var diff = t2-t1;
+							var diffYears = Math.floor(diff/years);
+							var diffDays = Math.floor((diff/days)-diffYears*365);
+							var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+							var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+							var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+							document.getElementById("sitetime").innerHTML="369's Blog 已开通 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒"; 
+						}
+						siteTime();
+					</script>
+					<br> 
+					Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }}
+					<br>
                     Theme on <a href="{{ site.github_repo }}">GitHub</a> |
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
@@ -104,6 +139,8 @@
         </div>
     </div>
 </footer>
+
+
 
 <!-- jQuery -->
 <script src="{{ "/js/jquery.min.js " | prepend: site.baseurl }}"></script>
