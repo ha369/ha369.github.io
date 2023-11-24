@@ -243,21 +243,9 @@ layout: default
   defer="defer"
 ></script>
 <style>
-  /* Hide Mermaid code in light mode */
   pre.language-mermaid,
   code.language-mermaid {
     display: none;
-  }
-
-  /* Style for Mermaid diagrams in dark mode */
-  @media (prefers-color-scheme: dark) {
-    .mermaid {
-      background-color: #333; 
-      color: #fff; 
-      border-radius: 5px;
-      padding: 10px;
-      overflow: auto;
-    }
   }
 </style>
 
@@ -272,7 +260,11 @@ layout: default
         m.classList.add("mermaid");
         m.textContent = x.textContent;
         x.parentNode.insertAdjacentElement("beforebegin", m);
-      }'
+      }
+	  const isDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+	  if (isDarkMode) {
+		mermaid.initialize({ theme: "dark" });
+	  }'
 ></script>
 <!-- 使用了 prismjs 来进行代码渲染 -->
 <!-- 4个插件：代码行号、动态代码高亮、工具栏、括号匹配，选中复制全部代码的按钮 -->
