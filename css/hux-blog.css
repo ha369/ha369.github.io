@@ -31,6 +31,14 @@
     user-select: none;
     -webkit-user-select: none;
   }  
+  pre.language-mermaid,
+  code.language-mermaid {
+    color: #F9F9F9; 
+  }
+
+  .mermaid {
+    color: #F9F9F9; 
+  }
 }
 
 @media (prefers-color-scheme: light) {
