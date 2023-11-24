@@ -5,6 +5,7 @@ layout: null
   {% for post in site.posts %}
     {
       "title": "{{ post.title | escape }}",
+	  "subtitle" : "{{ post.subtitle | escape }}",
       "category": "{{ post.category }}",
       "description": "{{ post.description }}",
       "tags": "{{ post.tags | join: ', ' }}",

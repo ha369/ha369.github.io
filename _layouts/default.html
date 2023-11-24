@@ -6,13 +6,16 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
 
+	{% include search.html %}
+	{% include float-btn.html %}
+
     {% include nav.html %}
 
     {{ content }}
 
     {% include footer.html %}
 
-	{% include back_top_button.html %}
+	
 
 <!-- Image to hack wechat -->
 <img src="/img/apple-touch-icon.png" width="0" height="0" />

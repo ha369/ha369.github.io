@@ -243,12 +243,24 @@ layout: default
   defer="defer"
 ></script>
 <style>
+  /* Hide Mermaid code in light mode */
   pre.language-mermaid,
   code.language-mermaid {
     display: none;
   }
+
+  /* Style for Mermaid diagrams in dark mode */
+  @media (prefers-color-scheme: dark) {
+    .mermaid {
+      background-color: #333; 
+      color: #fff; 
+      border-radius: 5px;
+      padding: 10px;
+      overflow: auto;
+    }
+  }
 </style>
-<!-- Mermaid -->
+
 <script
   src="https://cdn.jsdelivr.net/npm/mermaid@8.7.0/dist/mermaid.min.js"
   defer="defer"

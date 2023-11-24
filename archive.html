@@ -32,7 +32,7 @@ header-img: "img/archive-bg.jpg"
 				  {% for post in year.items %}
 				  <li>
 				  <span style="color: #aaa;font-family: Monaco;">{{ post.date | date: '%m-%d' }}</span> &raquo; 
-				  <a href="{{site.baseurl}}{{ post.url }}">{{ post.title }}</a>
+				  <a href="{{site.baseurl}}{{ post.url }}" style="text-decoration:none;"><span style="color: blue;">{{ post.title }}</span></a>
 				  </li>
 				  {% endfor %}
 				</ul>
