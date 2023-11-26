@@ -155,7 +155,7 @@ layout: default
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
         				{% for tag in site.tags %}
-                            {% if tag[1].size > {{site.featured-condition-size}} %}
+                            {% if tag[1].size > site.featured-condition-size %}
                 				<a href="/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
                                     {{ tag[0] }}
                                 </a>
@@ -267,67 +267,46 @@ layout: default
 	  }'
 ></script>
 <!-- 使用了 prismjs 来进行代码渲染 -->
-<!-- 4个插件：代码行号、动态代码高亮、工具栏、括号匹配，选中复制全部代码的按钮 -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/combine/npm/prismjs@1.21.0/plugins/line-numbers/prism-line-numbers.min.css,npm/prismjs@1.21.0/plugins/toolbar/prism-toolbar.min.css,npm/prismjs@1.21.0/plugins/match-braces/prism-match-braces.min.css,npm/prism-themes@1.4.0/themes/prism-nord.min.css"
-/>
-<script
-  src="https://cdn.jsdelivr.net/combine/npm/prismjs@1.21.0/components/prism-core.min.js,npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js,npm/prismjs@1.21.0/plugins/line-numbers/prism-line-numbers.min.js,npm/prismjs@1.21.0/plugins/toolbar/prism-toolbar.min.js,npm/prismjs@1.21.0/plugins/match-braces/prism-match-braces.min.js"
-  async="async"
-  data-autoloader-path="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/"
-  onload='
-    document.body.classList.add("line-numbers","match-braces");
-    Prism.plugins.toolbar.registerButton("select-code", function (env) {
-      let button = document.createElement("button");
-      button.textContent = "复制 " + env.language;
-      button.addEventListener("click", function () {
-        const code = env.element.textContent;
-        
-        // 创建一个临时的 textarea 元素
-        const textarea = document.createElement("textarea");
-        textarea.value = code;
-		// 将代码文本放入 textarea
-        document.body.appendChild(textarea);
-        
-		// 选定该文本并将其复制到剪贴板
-        textarea.select();
-        
-        try {
-          document.execCommand("copy");
-          console.log("代码已复制到剪贴板!");
-		  
-		  // 显示成功消息
-          const message = document.createElement("div");
-          message.textContent = "已复制！";
-          message.style.position = "fixed";
-          message.style.top = "10px";
-          message.style.left = "50%";
-          message.style.transform = "translateX(-50%)";
-          message.style.padding = "10px";
-          message.style.background = "#4CAF50";
-          message.style.color = "white";
-          message.style.borderRadius = "5px";
-		  
-		  document.body.appendChild(message);
-          
-          // 在2秒后自动移除提示消息
-          setTimeout(() => {
-            document.body.removeChild(message);
-          }, 2000);
-        } catch (err) {
-          console.error("不能复制代码到剪贴板", err);
-        }
-        
-        // 移除临时的 textarea
-        document.body.removeChild(textarea);
-      });
-      return button;
-    })'
-></script>
+<!-- 插件：代码行号、括号匹配、动态代码高亮、工具栏、文件树、差异高亮，复制按钮... -->
+<link href="/css/prism.css" rel="stylesheet" />
+<script src="/js/prism.js"
+        onload='document.body.classList.add("line-numbers", "match-braces", "language-diff");'></script>
 <!-- 使用了 medium-zoom 来进行图片预览 -->
 <script src="/js/medium-zoom.min.js"></script>
 <script>mediumZoom(document.querySelectorAll('div.post-container img'), { background: 'rgba(1,1,1,0.8)' })</script>
+<!-- 新窗口打开外部链接 -->
+<script type="text/javascript">
+	$(document).ready(function() {
+
+   $("a[href^=http]").each(function(){
+
+      // NEW - excluded domains list
+      var excludes = [
+         'excludeddomain1.com',
+         'excludeddomain2.com',
+         'excluded.subdomain.com'
+      ];
+      for(i=0; i<excludes.length; i++) {
+         if(this.href.indexOf(excludes[i]) != -1) {
+            return true; // continue each() with next link
+         }
+      }
+
+      if(this.href.indexOf(location.hostname) == -1) {
+
+           // attach a do-nothing event handler to ensure we can 'trigger' a click on this link
+           $(this).click(function() { return true; }); 
+
+           $(this).attr({
+               target: "_blank",
+               title: "Opens in a new window"
+           });
+
+           $(this).click(); // trigger it
+      }
+   })
+});
+</script>
 <style>
     /* place left on bigger screen */
     @media all and (min-width: 800px) {

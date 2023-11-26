@@ -30,7 +30,8 @@ header-img: "img/tag-bg.jpeg"
 					<sup>{{site.posts.size}}</sup>
 				</a>
 				{% for tag in site.tags %}
-				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}"><i class="fa fa-tag" aria-hidden="true"></i> {{ tag[0] }}<sup>{{tag[1].size}}</sup></a>
+				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}"><i class="fa fa-tag" aria-hidden="true"></i>
+					{{ tag[0] }} <sup>{{tag[1].size}}</sup></a>
 				{% endfor %}
 			</div>
 
@@ -62,7 +63,7 @@ header-img: "img/tag-bg.jpeg"
 				        </h3>
 				        {% endif %}
 				    </a>
-				    <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p>
+				    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
 				</div>
 				<hr>
 				{% endfor %}
